@@ -22,10 +22,10 @@ camera.fov = 20
 
 
 def update():
-    player.y += held_keys['i']*6*time.dt
-    player.y -= held_keys['j'] * 6 * time.dt
-    a = held_keys['k']*-20
-    b = held_keys['j'] * 20
+    player.y += held_keys['up arrow']*6*time.dt
+    player.y -= held_keys['down arrow'] * 6 * time.dt
+    a = held_keys['right arrow']*-20
+    b = held_keys['left arrow'] * 20
     if a != 0:
         player.rotation_z = a
     else:

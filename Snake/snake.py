@@ -1,16 +1,12 @@
-
 from random import randint
 from ursina import *
+
 app = Ursina()
 
-snake = Entity(model='cube', texture='snake',
-               scale=0.4, z=-1, collider='box')
-ground = Entity(model='cube', texture='grass',
-                rotation=(90, 0, 0), scale=(5, 1, 5), z=1)
-apple = Entity(model='cube', texture='apple',
-               scale=0.4, position=(1, -1, -1), collider='mesh')
-body = [Entity(model='cube', scale=0.2, texture='body')
-        for i in range(14)]
+snake = Entity(model='cube', texture='snake', scale=0.4, z=-1, collider='box')
+ground = Entity(model='cube', texture='grass', rotation=(90, 0, 0), scale=(5, 1, 5), z=1)
+apple = Entity(model='cube', texture='apple', scale=0.4, position=(1, -1, -1), collider='mesh')
+body = [Entity(model='cube', scale=0.2, texture='body') for _ in range(14)]
 
 camera.orthographic = True
 camera.fov = 8
@@ -36,16 +32,22 @@ def update():
 
 def input(key):
     global dx, dy
-    for x, y, z in zip(['l', 'j'], [2, -2], [270, 90]):
-        if key == x:
-            snake.rotation_z = z
-            dx = y
-            dy = 0
-    for x, y, z in zip(['i', 'm'], [2, -2], [180, 0]):
-        if key == x:
-            snake.rotation_z = z
-            dx = 0
-            dy = y
+    if key == 'right arrow':
+        snake.rotation_z = 0
+        dx = 2
+        dy = 0
+    elif key == 'left arrow':
+        snake.rotation_z = 180
+        dx = -2
+        dy = 0
+    elif key == 'up arrow':
+        snake.rotation_z = 90
+        dx = 0
+        dy = 2
+    elif key == 'down arrow':
+        snake.rotation_z = 270
+        dx = 0
+        dy = -2
 
 
 app.run()
